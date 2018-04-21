@@ -13,7 +13,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning) # suppress un
 plexpy_url_format = '{0}://{1}:{2}{4}/api/v2?apikey={3}'
 
 def main():
-    print "Started"
+    print("Started")
     args = parse_args()
     plexpy_url = get_url(args.plexpywebprotocol, args.plexpyhost, args.plexpyport, args.plexpyapikey, args.plexpybaseurl)
     influxdb_client = InfluxDBClient(args.influxdbhost, args.influxdbport, args.influxdbuser, args.influxdbpassword, args.influxdbdatabase)
@@ -80,7 +80,7 @@ def get_activity(plexpy_url,influxdb_client):
                         transcode_stream_count += 1
                         if playing:
                             transcode_stream_playing_count += 1
-                            
+
                 if s['state'] == 'playing':
                     total_stream_playing_count += 1
 
@@ -111,7 +111,7 @@ def get_activity(plexpy_url,influxdb_client):
             influxdb_client.write_points(json_body)
 
     except Exception as e:
-        print str(e)
+        print(str(e))
         pass
 
 def get_users(plexpy_url,influxdb_client):
@@ -140,7 +140,7 @@ def get_users(plexpy_url,influxdb_client):
 
             influxdb_client.write_points(json_body)
     except Exception as e:
-        print str(e)
+        print(str(e))
         pass
 
 def get_libraries(plexpy_url,influxdb_client):
@@ -167,7 +167,7 @@ def get_libraries(plexpy_url,influxdb_client):
 
             influxdb_client.write_points(json_body)
     except Exception as e:
-        print str(e)
+        print(str(e))
         pass
 
 def num(s):
@@ -180,7 +180,7 @@ def create_database(influxdb_client, database):
     try:
         influxdb_client.query('CREATE DATABASE {0}'.format(database))
     except Exception as e:
-        print str(e)
+        print(str(e))
     pass
 
 def init_exporting(interval, plexpy_url, influxdb_client):
@@ -202,6 +202,6 @@ def get_url(protocol,host,port,apikey,baseurl):
         base = "/{}".format(baseurl)
 
     return plexpy_url_format.format(protocol,host,port,apikey,base)
-    
+
 if __name__ == '__main__':
     main()
