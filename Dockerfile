@@ -8,4 +8,4 @@ ENV INFLUXDB_PORT 8086
 ENV INFLUXDB_DB TAUTULLI
 ADD plexpy_influxdb_export.py /
 RUN pip install influxdb
-CMD [ "python", "./plexpy_influxdb_export.py --plexpyhost "$TAUTULLI_HOST" --plexpyport "$TAUTULLI_PORT" --plexpyapikey "$TAUTULLI_KEY" --interval "$INTERVAL" --influxdbhost "$INFLUXDB_HOST" --influxdbport "$INFLUXDB_PORT" --influxdbdatabase "$INFLUXDB_DB" "]
+CMD python /plexpy_influxdb_export.py --plexpyhost "$TAUTULLI_HOST" --plexpyport "$TAUTULLI_PORT" --plexpyapikey "$TAUTULLI_KEY" --interval "$INTERVAL" --influxdbhost "$INFLUXDB_HOST" --influxdbport "$INFLUXDB_PORT" --influxdbdatabase "$INFLUXDB_DB"
